@@ -1,0 +1,25 @@
+.parent {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
+
+.output-text {
+    padding-top: 30px;
+}
+
+input {
+    width: 95vw;
+    padding: 5px;
+    margin: 0;
+}
+
+p {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+h1 {
+    font-family: Arial, Helvetica, sans-serif;
+    text-decoration: underline;
+    font-size: 20px;
+}
