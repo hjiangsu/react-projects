@@ -1,0 +1,27 @@
+:root {
+    --button-padding: 20px;
+}
+
+.header-root {
+    display: flex;
+    flex-direction: row;
+    background-color: black;
+    height: 5vw;
+}
+
+.header-left {
+    width: 50vw;
+    display: flex;
+    flex-direction: row;
+}
+
+.header-right {
+    width: 50vw;
+    display: flex;
+    flex-direction: row-reverse;
+}
+
+.header-right button {
+    padding-left: var(--button-padding);
+    padding-right: var(--button-padding);
+}
