@@ -39,15 +39,6 @@ function Login(props) {
             }
             props.login(user)
         });
-
-
-        // const user = {
-        //     userID: "hamlet", 
-        //     email: "test", 
-        //     gender: "Male", 
-        //     age: 25
-        // }
-        // props.login(user)
     }
 
     return (
@@ -55,17 +46,16 @@ function Login(props) {
             <div className="login-container">
                 <div className="login-app-info">
                     <h1>Tic-Tac-Toe</h1>
-                    <h2>Hamlet Jiang Su</h2>
                     <h3>
-                        A multiplayer Tic Tac Toe game using React.js, Express.js, MongoDB, and Socket.io
+                        A multiplayer Tic-Tac-Toe application using React.js, Express.js, MongoDB, and Socket.io.
                     </h3>
                 </div>
                 <div className="login-input">
                     <h1>Login</h1>
                     <form className="login-form" onSubmit={authenticate}>
-                        <input type="text" name="username" placeholder="Username" value={username} 
+                        <input type="text" name="username" placeholder="Username" value={username} required
                             onChange={(e) => setUsername(e.target.value)}/>
-                        <input type="password" name="password" placeholder="Password" value={password} 
+                        <input type="password" name="password" placeholder="Password" value={password} required
                             onChange={(e) => setPassword(e.target.value)}/>
                         <input type="submit" value="Log In"/>
                     </form>

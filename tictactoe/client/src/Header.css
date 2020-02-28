@@ -1,12 +1,12 @@
 :root {
-    --button-padding: 20px;
+    --button-padding: 32px;
 }
 
 .header-root {
     display: flex;
     flex-direction: row;
-    background-color: black;
-    height: 5vw;
+    background-color: #242424;
+    height: 7vh;
 }
 
 .header-left {
@@ -21,7 +21,12 @@
     flex-direction: row-reverse;
 }
 
-.header-right button {
-    padding-left: var(--button-padding);
-    padding-right: var(--button-padding);
+.header-button {
+    width:15vw;
+    background-color: #ffe082;
+    border: none;
+    color: #242424;
+    text-decoration: none;
+    cursor: pointer;
 }
+

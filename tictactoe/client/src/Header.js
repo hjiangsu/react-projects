@@ -17,13 +17,13 @@ function Header(props) {
     }
 
     if (props.loginStatus) {
-        button = <button onClick={logout}>Log Out</button>
+        button = <button className="header-button" onClick={logout}>Log Out</button>
     }
     else if (!props.loginStatus && !props.registerStatus) {
-        button = <button onClick={register}>Register</button>
+        button = <button className="header-button"  onClick={register}>Register</button>
     }
     else if (!props.loginStatus && props.registerStatus) {
-        button = <button onClick={login}>Log In</button>
+        button = <button className="header-button"  onClick={login}>Log In</button>
     }
 
     return (
