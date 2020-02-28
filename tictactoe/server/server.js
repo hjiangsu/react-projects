@@ -8,15 +8,18 @@ const passwordHash = require('password-hash');
 const bodyParser = require('body-parser');
 // const logger = require('morgan');
 const User = require('./userSchema');
-const dotenv = require('dotenv')
+const dotenv = require('dotenv').config();
 
 const API_PORT = 3001;
 const app = express();
 // app.use(cors());
 const router = express.Router();
 
+
+console.log(process.env.MONGOLAB_URI)
+
 // this is our MongoDB database
-const dbRoute = "mongodb+srv://hjiangsu:firelight98X.@hjiangsu-ikjzt.mongodb.net/test?retryWrites=true&w=majority";
+const dbRoute = process.env.MONGOLAB_URI;
 
 // connects our back end code with the database
 mongoose.connect(dbRoute, { useNewUrlParser: true });
