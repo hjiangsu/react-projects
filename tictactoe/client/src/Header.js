@@ -1,4 +1,5 @@
 import React from 'react';
+import axios from 'axios';
 import './Header.css';
 
 function Header(props) {
@@ -9,6 +10,13 @@ function Header(props) {
     }
 
     const logout = () => {
+        axios.get('/api/logout', {
+            withCredentials: true
+        })
+        .then((res) => {
+            console.log(res);
+        })
+        
         props.logout();
     }
 

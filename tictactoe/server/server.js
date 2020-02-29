@@ -150,6 +150,17 @@ router.post('/register', (req, res) => {
     });
 });
 
+router.get('/logout', (req, res) => {
+    if (req.session.user) {
+        req.session.destroy(() => {
+            return res.json({success: true});
+        });
+    }
+    else {
+        return res.json({success: false});
+    }
+});
+
 // this is our get method
 // this method fetches all available data in our database
 // router.get('/getData', (req, res) => {
