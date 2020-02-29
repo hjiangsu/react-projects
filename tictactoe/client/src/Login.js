@@ -7,11 +7,14 @@ function Login(props) {
     // useState Hooks to keep information
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
+    const [errorMsg, setErrorMsg] = useState({status: false, error: ''});
+
+    const errorStatus = errorMsg.status ? errorMsg.error : null;
 
     // Authenticate with server database
     const authenticate = (e) => {
         e.preventDefault();
-        console.log("Logging in with credentials: ", username, password);
+        console.log("Logging in with following credentials => ", "username:" , username, "password:", password);
 
         // Call authentication with server and return userid/cookie
         axios.post('/api/login', {
@@ -19,25 +22,18 @@ function Login(props) {
             password: password
         })
         .then((response) => {
-            console.log(response)
             if (response.data.success) {
-                console.log("success")
+                console.log("Login successful");
                 props.login(response.data.user);
             }
             else {
-                console.log("error")
+                console.log("Login unsuccessful");
+                setErrorMsg({status: true, error: <p className="login-error-message">Error: {response.data.error}</p>});
             }
         })
         .catch((err) => {
-            console.log("error");
+            console.log("Unexpected error has occurred");
             console.log(err);
-
-            const user = {
-                userID: "error", 
-                email: "error", 
-                age: -1
-            }
-            props.login(user)
         });
     }
 
@@ -45,10 +41,10 @@ function Login(props) {
         <div className="login-root">
             <div className="login-container">
                 <div className="login-app-info">
-                    <h1>Tic-Tac-Toe</h1>
+                    {/* <h1>Tic-Tac-Toe</h1>
                     <h3>
                         A multiplayer Tic-Tac-Toe application using React.js, Express.js, MongoDB, and Socket.io.
-                    </h3>
+                    </h3> */}
                 </div>
                 <div className="login-input">
                     <h1>Login</h1>
@@ -59,6 +55,9 @@ function Login(props) {
                             onChange={(e) => setPassword(e.target.value)}/>
                         <input type="submit" value="Log In"/>
                     </form>
+                    <div className="login-error">
+                        {errorStatus}
+                    </div>
                 </div>
             </div>
         </div>

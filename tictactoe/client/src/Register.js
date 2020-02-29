@@ -9,25 +9,22 @@ function Register(props) {
     const [passwordConfirm, setPasswordConfirm] = useState("");
     const [email, setEmail] = useState("");
     const [age, setAge] = useState("");
-    const [error, setError] = useState("");
 
-    useEffect(() => checkPassword());
+    const [errorMsg, setErrorMsg] = useState({status: false, error: ''});
+    const errorStatus = errorMsg.status ? errorMsg.error : null;
 
-    const errorElement = (
-        <div className="register-error">
-            <p>
-                Error: {error}
-            </p>
-        </div>);
-
-    const checkPassword = () => {
-        if (password !== passwordConfirm) {
-            setError("Passwords do not match");
+    useEffect(() => {
+        const checkPassword = () => {
+            if (password !== passwordConfirm) {
+                setErrorMsg({status:true, error:<p>Error: Passwords do not match</p>});
+            }
+            else {
+                setErrorMsg({status:false, error: ''});
+            }
         }
-        else {
-            setError("");
-        }
-    }
+
+        checkPassword();
+    }, [password, passwordConfirm]);
 
     const createAccount = (e) => {
         e.preventDefault();
@@ -39,19 +36,23 @@ function Register(props) {
                 email: email,
                 age: age
             })
-            .then((data) => {
-                if (data.success) {
-                    console.log("successfully registered")
+            .then((response) => {
+                console.log(response.data.error)
+                if (response.data.success) {
+                    console.log("Successfully registered new user");
+                    
+                }
+                else {
+                    console.log("Error occured while registering new user");
+                    setErrorMsg({status:true, error:<p>Error: {response.data.error}</p>});
                 }
             })
-            .catch((error) => {
-                console.log("error occurred");
-                console.log(error);
+            .catch((err) => {
+                console.log("Unexpected error has occurred");
+                console.log(err);
             })
         }
     }
-
-    const choice = error ? errorElement : null;
 
     return (
         <div className="register-root">
@@ -62,25 +63,60 @@ function Register(props) {
                 <div className="register-input">
                     <h1>Create an Account</h1>
                     <form id="register-form" className="register-form" onSubmit={createAccount}>
-                        <input type="text" name="username" value={username} placeholder="Username" required 
-                            onChange={(e) => setUsername(e.target.value)}/>
+                        <input 
+                            type="text" 
+                            name="username" 
+                            value={username} 
+                            placeholder="Username" 
+                            onChange={(e) => setUsername(e.target.value)}
+                            required
+                            />
 
-                        <input type="password" name="password" value={password} placeholder="Password" required 
-                            onChange={(e) => setPassword(e.target.value)}/>
+                        <input 
+                            type="password" 
+                            name="password" 
+                            value={password} 
+                            placeholder="Password" 
+                            onChange={(e) => setPassword(e.target.value)}
+                            required
+                            />
 
-                        <input type="password" name="password-confirm" value={passwordConfirm} placeholder="Confirm Password" required 
-                            onChange={(e) => {
-                                setPasswordConfirm(e.target.value)}}/>
+                        <input 
+                            type="password" 
+                            name="password-confirm" 
+                            value={passwordConfirm} 
+                            placeholder="Confirm Password" 
+                            onChange={(e) => setPasswordConfirm(e.target.value)}
+                            required
+                            />
 
-                        <input type="email" name="email" value={email} placeholder="Email" required 
-                            onChange={(e) => setEmail(e.target.value)}/>
+                        <input 
+                            type="email" 
+                            name="email" 
+                            value={email} 
+                            placeholder="Email" 
+                            onChange={(e) => setEmail(e.target.value)}
+                            required
+                            />
 
-                        <input type="number" name="age" value={age} placeholder="Age" required 
-                            onChange={(e) => setAge(e.target.value)}/>
+                        <input 
+                            type="number" 
+                            name="age" 
+                            value={age} 
+                            placeholder="Age" 
+                            onChange={(e) => setAge(e.target.value)}
+                            required
+                            />
 
-                        <input type="submit" name="submit" value="Create an Account" />
+                        <input 
+                            type="submit" 
+                            name="submit" 
+                            value="Create an Account" 
+                            />
                     </form>
-                    {choice}
+                    <div className="register-error">
+                        {errorStatus}
+                    </div>
                 </div>
             </div>
         </div>

@@ -1,4 +1,5 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
+import axios from 'axios';
 
 import Login from './Login.js';
 import Homepage from './Homepage.js';
@@ -13,10 +14,22 @@ function App(props) {
   const [register, setRegisterStatus] = useState(false);
   
   const [user, setUser] = useState({
-    userID: "",
+    username: "",
     email: "",
     age: ""
   });
+
+  useEffect( () => {
+    axios.get('/api/', {withCredentials: true})
+    .then((res) => {
+      if (res.data.user) {
+
+        setUser(res.data.user)
+        setLoginStatus(true);
+      }
+      console.log(res);
+    })
+  }, []);
 
   const loginComponent = 
     <Login login={(user) => { 
@@ -37,7 +50,7 @@ function App(props) {
             logout={() => {
               setLoginStatus(false);
               setUser({
-                userID: "",
+                username: "",
                 email: "",
                 age: ""
               });
