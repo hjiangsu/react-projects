@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import axios from 'axios';
-import './Register.css';
+import '../stylesheets/Register.css';
 
 function Register(props) {
 

@@ -1,6 +1,6 @@
 import React from 'react';
 import axios from 'axios';
-import './Header.css';
+import '../stylesheets/Header.css';
 
 function Header(props) {
     var button;

@@ -1,12 +1,12 @@
 import React, {useState, useEffect} from 'react';
 import axios from 'axios';
 
-import Login from './Login.js';
-import Homepage from './Homepage.js';
-import Header from './Header.js';
-import Register from './Register';
+import Login from './pages/Login.js';
+import Homepage from './pages/Homepage.js';
+import Header from './components/Header.js';
+import Register from './pages/Register';
 
-import './App.css';
+import './stylesheets/App.css';
 
 function App(props) {
 
