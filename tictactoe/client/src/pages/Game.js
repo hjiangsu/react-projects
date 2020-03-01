@@ -1,11 +1,14 @@
 import React from 'react';
+import {useHistory} from 'react-router-dom';
 
 function Game(props) {
+
+    const history = useHistory()
 
     return (
         <div className="game-queue-root">
             
-            <button onClick=""/>
+            <button onClick={history.push('/profile')}/>
         </div>
     );
 }

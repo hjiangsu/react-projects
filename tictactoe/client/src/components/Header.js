@@ -1,42 +1,33 @@
 import React from 'react';
 import axios from 'axios';
+import {useHistory} from 'react-router-dom';
 
 import '../stylesheets/Header.css';
 import logo from '../images/logo.png';
 
 function Header(props) {
     var button;
+    
+    const history = useHistory();
 
     const logOutSequence = () => {
-
+        axios.get('/api/logout', {
+            withCredentials: true
+        })
+        .then((res) => {
+            console.log(res);
+            props.logout();
+        });
     }
 
     const gotoRegister = () => {
-        
+        history.push('/register');
     }
 
     const gotoLogin = () => {
-
+        history.push('/login');
     }
-    // const login = () => {
-    //     props.onLogin();
-    // }
-
-    // const logout = () => {
-    //     axios.get('/api/logout', {
-    //         withCredentials: true
-    //     })
-    //     .then((res) => {
-    //         console.log(res);
-    //     })
-        
-    //     props.logout();
-    // }
-
-    // const register = () => {
-    //     props.onRegister();
-    // }
-
+ 
     console.log(props.page)
 
     if (props.page === 'home') {

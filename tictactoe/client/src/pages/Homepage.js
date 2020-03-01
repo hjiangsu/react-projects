@@ -25,7 +25,12 @@ function Homepage(props) {
     else {
         return (
             <Fragment>
-                <Header />
+                <Header 
+                    page={'home'} 
+                    logout={() => {
+                        props.updateAuthentication();
+                    }}
+                />
                 <div className="homepage-root">
                     <div className="homepage-container">
                         <div className="homepage-left">

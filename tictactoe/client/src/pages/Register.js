@@ -1,5 +1,9 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, Fragment} from 'react';
+import {useHistory} from 'react-router-dom';
 import axios from 'axios';
+
+import Header from '../components/Header.js';
+
 import '../stylesheets/Register.css';
 
 function Register(props) {
@@ -9,6 +13,8 @@ function Register(props) {
     const [passwordConfirm, setPasswordConfirm] = useState("");
     const [email, setEmail] = useState("");
     const [age, setAge] = useState("");
+
+    const history = useHistory();
 
     const [errorMsg, setErrorMsg] = useState({status: false, error: ''});
     const errorStatus = errorMsg.status ? errorMsg.error : null;
@@ -40,10 +46,10 @@ function Register(props) {
                 console.log(response.data.error)
                 if (response.data.success) {
                     console.log("Successfully registered new user");
-                    
+                    history.push('/profile');
                 }
                 else {
-                    console.log("Error occured while registering new user");
+                    console.log("Error occurred while registering new user");
                     setErrorMsg({status:true, error:<p>Error: {response.data.error}</p>});
                 }
             })
@@ -55,71 +61,74 @@ function Register(props) {
     }
 
     return (
-        <div className="register-root">
-            <div className="register-container">
-                <div className="register-info">
-                    {/* add content here */}
-                </div>
-                <div className="register-input">
-                    <h1>Register</h1>
-                    <form id="register-form" className="register-form" onSubmit={createAccount}>
-                        <input 
-                            type="text" 
-                            name="username" 
-                            value={username} 
-                            placeholder="Username" 
-                            onChange={(e) => setUsername(e.target.value)}
-                            required
-                            />
+        <Fragment>
+            <Header page={'register'} />
+            <div className="register-root">
+                <div className="register-container">
+                    <div className="register-info">
+                        {/* add content here */}
+                    </div>
+                    <div className="register-input">
+                        <h1>Register</h1>
+                        <form id="register-form" className="register-form" onSubmit={createAccount}>
+                            <input 
+                                type="text" 
+                                name="username" 
+                                value={username} 
+                                placeholder="Username" 
+                                onChange={(e) => setUsername(e.target.value)}
+                                required
+                                />
 
-                        <input 
-                            type="password" 
-                            name="password" 
-                            value={password} 
-                            placeholder="Password" 
-                            onChange={(e) => setPassword(e.target.value)}
-                            required
-                            />
+                            <input 
+                                type="password" 
+                                name="password" 
+                                value={password} 
+                                placeholder="Password" 
+                                onChange={(e) => setPassword(e.target.value)}
+                                required
+                                />
 
-                        <input 
-                            type="password" 
-                            name="password-confirm" 
-                            value={passwordConfirm} 
-                            placeholder="Confirm Password" 
-                            onChange={(e) => setPasswordConfirm(e.target.value)}
-                            required
-                            />
+                            <input 
+                                type="password" 
+                                name="password-confirm" 
+                                value={passwordConfirm} 
+                                placeholder="Confirm Password" 
+                                onChange={(e) => setPasswordConfirm(e.target.value)}
+                                required
+                                />
 
-                        <input 
-                            type="email" 
-                            name="email" 
-                            value={email} 
-                            placeholder="Email" 
-                            onChange={(e) => setEmail(e.target.value)}
-                            required
-                            />
+                            <input 
+                                type="email" 
+                                name="email" 
+                                value={email} 
+                                placeholder="Email" 
+                                onChange={(e) => setEmail(e.target.value)}
+                                required
+                                />
 
-                        <input 
-                            type="number" 
-                            name="age" 
-                            value={age} 
-                            placeholder="Age" 
-                            onChange={(e) => setAge(e.target.value)}
-                            required
-                            />
+                            <input 
+                                type="number" 
+                                name="age" 
+                                value={age} 
+                                placeholder="Age" 
+                                onChange={(e) => setAge(e.target.value)}
+                                required
+                                />
 
-                        <input 
-                            type="submit" 
-                            name="submit" 
-                            value="Create an Account" 
-                            />
-                    </form>
-                    <div className="register-error">
-                        {errorStatus}
+                            <input 
+                                type="submit" 
+                                name="submit" 
+                                value="Create an Account" 
+                                />
+                        </form>
+                        <div className="register-error">
+                            {errorStatus}
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
+        </Fragment>
     )
 }
 

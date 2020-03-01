@@ -130,9 +130,15 @@ router.post('/register', (req, res) => {
                         console.log(err);
                         return res.json({success: false, error: err});
                     }
-                });
 
-                return res.json({success: true, uid: user.id});
+                    User.findOne({username: user.username}, (err, data) => { 
+                        if(err) return res.json({success: false, error: err});
+
+                        const userSession = {userid: data.id, username: data.username};
+                        req.session.user = userSession;
+                        return res.json({success: true, uid: user.id});
+                    });
+                });
             }
         })
     }

@@ -49,9 +49,7 @@ function Login(props) {
         <Fragment>
             <Header 
                 page={'login'}
-                onClickRegister={}
-                />
-            
+            />
             <div className="login-root">
                 <div className="login-container">
                     <div className="login-app-info">
