@@ -1,8 +1,7 @@
 import React, {useState, useEffect} from 'react';
-import {Switch, Route, Redirect} from "react-router-dom";
+import {useHistory, useLocation} from "react-router-dom";
 import axios from 'axios';
 
-import Register from './pages/Register';
 import Login from './pages/Login.js';
 import Homepage from './pages/Homepage.js';
 
@@ -12,37 +11,49 @@ function App(props) {
 
     const [isAuthenticated, setAuthentication] = useState(false);
     const [userData, setUserData] = useState({ username: '', email: '', age: ''});
+    const history = useHistory();
+    const location = useLocation();
     
     // Check to see if current client is authenticated
     useEffect(() => {
         axios.get('/api/', {withCredentials: true})
         .then((res) => {
+            console.log("checking status")
             if (res.data.user) {
                 setUserData(res.data.user);
                 setAuthentication(true);
+
+                if (location.pathname === '/Login' || location.pathname === '/' || location.pathname === '/register') {
+                    history.push('/home');
+                }
+                else {
+                    history.push(location.pathname);
+                }
+            }
+            else {
+                history.replace('/login');
             }
         });
     }, []);
 
-    return (
-        <Switch>
-            <Route path='/register'>
-                <Register />
-            </Route>
-            <Route path='/login'>
-                <Login />
-            </Route>
-            <Route path='/' render={(routerProps) => {
-                console.log(routerProps)
-                if (isAuthenticated) {
-                    return <Homepage user={userData}/>
-                }
-                else {
-                    return <Redirect to={{ pathname: '/login' }} />
-                }
-            }} />
-        </Switch>
-    );
+    // useEffect(() => {
+
+    // }, []);
+    
+    console.log(location)
+
+    if (isAuthenticated && location.pathname === '/home') {
+        return <Homepage user={userData}/>;
+    }
+    else {
+        return (
+            <Login 
+                updateAuthentication={() => {
+                    setAuthentication(true);
+                }}
+            />
+        );
+    }
 }
 
 export default App;

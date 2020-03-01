@@ -1,7 +1,14 @@
-import React, {useState} from 'react';
+import React, {useState, Fragment} from 'react';
+import {Router, Redirect, Switch, Route} from 'react-router-dom';
 import axios from 'axios';
+
+import Register from './Register.js';
+import Header from '../components/Header.js';
+
 import '../stylesheets/Login.css';
 import logo from '../images/logo.png';
+import Homepage from './Homepage.js';
+
 
 function Login(props) {
 
@@ -25,7 +32,7 @@ function Login(props) {
         .then((response) => {
             if (response.data.success) {
                 console.log("Login successful");
-                props.login(response.data.user);
+                props.updateAuthentication();
             }
             else {
                 console.log("Login unsuccessful");
@@ -39,35 +46,57 @@ function Login(props) {
     }
 
     return (
-        <div className="login-root">
-            <div className="login-container">
-                <div className="login-app-info">
-                    <div className="login-app-info-logo-container">
-                        <img src={logo}alt="Logo" id="login-app-info-logo"/>
+        <Fragment>
+            <Header 
+                page={'login'}
+                onClickRegister={}
+                />
+            
+            <div className="login-root">
+                <div className="login-container">
+                    <div className="login-app-info">
+                        <div className="login-app-info-logo-container">
+                            <img 
+                                src={logo}alt="Logo" 
+                                id="login-app-info-logo"
+                                />
+                        </div>
+                        <h1>Tic-Tac-Toe</h1>
+                        <h3>
+                            A multiplayer Tic-Tac-Toe application using React.js, Express.js, MongoDB, and Socket.io.
+                        </h3>
+                        <div className="login-app-info-links">
+                            {/* add github link, linkedin, portfolio */}
+                        </div>
                     </div>
-                    <h1>Tic-Tac-Toe</h1>
-                    <h3>
-                        A multiplayer Tic-Tac-Toe application using React.js, Express.js, MongoDB, and Socket.io.
-                    </h3>
-                    <div className="login-app-info-links">
-                        {/* add github link, linkedin, portfolio */}
-                    </div>
-                </div>
-                <div className="login-input">
-                    <h1>Login</h1>
-                    <form className="login-form" onSubmit={authenticate}>
-                        <input type="text" name="username" placeholder="Username" value={username} required
-                            onChange={(e) => setUsername(e.target.value)}/>
-                        <input type="password" name="password" placeholder="Password" value={password} required
-                            onChange={(e) => setPassword(e.target.value)}/>
-                        <input type="submit" value="Log In"/>
-                    </form>
-                    <div className="login-error">
-                        {errorStatus}
+                    <div className="login-input">
+                        <h1>Login</h1>
+                        <form className="login-form" onSubmit={authenticate}>
+                            <input 
+                                type="text" 
+                                name="username" 
+                                placeholder="Username" 
+                                value={username}
+                                onChange={(e) => setUsername(e.target.value)}
+                                required
+                                />
+                            <input 
+                                type="password" 
+                                name="password" 
+                                placeholder="Password" 
+                                value={password}
+                                onChange={(e) => setPassword(e.target.value)}
+                                required
+                                />
+                            <input type="submit" value="Log In"/>
+                        </form>
+                        <div className="login-error">
+                            {errorStatus}
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
+        </Fragment>
     );
 }
 

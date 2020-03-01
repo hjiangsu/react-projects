@@ -1,38 +1,52 @@
 import React from 'react';
 import axios from 'axios';
+
 import '../stylesheets/Header.css';
 import logo from '../images/logo.png';
 
 function Header(props) {
     var button;
 
-    const login = () => {
-        props.onLogin();
+    const logOutSequence = () => {
+
     }
 
-    const logout = () => {
-        axios.get('/api/logout', {
-            withCredentials: true
-        })
-        .then((res) => {
-            console.log(res);
-        })
+    const gotoRegister = () => {
         
-        props.logout();
     }
 
-    const register = () => {
-        props.onRegister();
-    }
+    const gotoLogin = () => {
 
-    if (props.loginStatus) {
-        button = <button className="header-button" onClick={logout}>Log Out</button>
     }
-    else if (!props.loginStatus && !props.registerStatus) {
-        button = <button className="header-button"  onClick={register}>Register</button>
+    // const login = () => {
+    //     props.onLogin();
+    // }
+
+    // const logout = () => {
+    //     axios.get('/api/logout', {
+    //         withCredentials: true
+    //     })
+    //     .then((res) => {
+    //         console.log(res);
+    //     })
+        
+    //     props.logout();
+    // }
+
+    // const register = () => {
+    //     props.onRegister();
+    // }
+
+    console.log(props.page)
+
+    if (props.page === 'home') {
+        button = <button className="header-button" onClick={logOutSequence}>Log Out</button>
     }
-    else if (!props.loginStatus && props.registerStatus) {
-        button = <button className="header-button"  onClick={login}>Log In</button>
+    else if (props.page === 'login') {
+        button = <button className="header-button"  onClick={gotoRegister}>Register</button>
+    }
+    else if (props.page === 'register') {
+        button = <button className="header-button"  onClick={gotoLogin}>Log In</button>
     }
 
     return (
