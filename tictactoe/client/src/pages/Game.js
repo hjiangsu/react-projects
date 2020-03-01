@@ -3,8 +3,9 @@ import React from 'react';
 function Game(props) {
 
     return (
-        <div>
-            Game Start
+        <div className="game-queue-root">
+            
+            <button onClick=""/>
         </div>
     );
 }

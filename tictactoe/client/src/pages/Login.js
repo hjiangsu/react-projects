@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import axios from 'axios';
 import '../stylesheets/Login.css';
+import logo from '../images/logo.png';
 
 function Login(props) {
 
@@ -41,10 +42,16 @@ function Login(props) {
         <div className="login-root">
             <div className="login-container">
                 <div className="login-app-info">
-                    {/* <h1>Tic-Tac-Toe</h1>
+                    <div className="login-app-info-logo-container">
+                        <img src={logo}alt="Logo" id="login-app-info-logo"/>
+                    </div>
+                    <h1>Tic-Tac-Toe</h1>
                     <h3>
                         A multiplayer Tic-Tac-Toe application using React.js, Express.js, MongoDB, and Socket.io.
-                    </h3> */}
+                    </h3>
+                    <div className="login-app-info-links">
+                        {/* add github link, linkedin, portfolio */}
+                    </div>
                 </div>
                 <div className="login-input">
                     <h1>Login</h1>

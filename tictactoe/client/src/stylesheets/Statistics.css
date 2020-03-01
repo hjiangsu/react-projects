@@ -4,6 +4,32 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    padding: 3em 3em;
     flex: 2;
+}
+
+.statistics-header {
+    flex: 1;
+}
+
+.statistics-header h1 {
+    font-size: 2em;
+    font-weight: 400;
+}
+
+.statistics-main {
+    flex: 3;
+}
+
+.statistics-main h2 {
+    font-size: 1.6em;
+    font-weight: 300;
+}
+
+.statistics-individual-matches {
+    flex: 4;
+}
+
+.statistics-individual-matches h2 {
+    font-size: 1.6em;
+    font-weight: 300;
 }

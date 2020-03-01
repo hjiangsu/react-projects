@@ -10,7 +10,7 @@ function Profile(props) {
     return(
         <div className="profile-root">
             <div className="profile-avatar">
-
+                Test
             </div>
             <div className="profile-info">
                 <ul>

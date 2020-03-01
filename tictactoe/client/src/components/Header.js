@@ -1,6 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import '../stylesheets/Header.css';
+import logo from '../images/logo.png';
 
 function Header(props) {
     var button;
@@ -37,7 +38,8 @@ function Header(props) {
     return (
         <div className="header-root">
             <div className="header-left">
-
+                <img src={logo} alt="Logo" id="header-logo"/>
+                <h1>Tic-Tac-Toe</h1>
             </div>
             <div className="header-right">
                 {button}

@@ -1,6 +1,6 @@
 .login-root {
     background-color:#121212;
-    height: 93vh;
+    height: 88vh;
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -23,7 +23,14 @@
     display: flex;
     flex: 1.5;
     flex-direction: column;
+    justify-content: center;
+    align-items: center;
     padding: 2em 2em;
+}
+
+#login-app-info-logo {
+    max-width: 125px;
+    max-height: 125px;
 }
 
 .login-app-info h1 {

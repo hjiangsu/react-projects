@@ -5,14 +5,28 @@
 .header-root {
     display: flex;
     flex-direction: row;
-    background-color: #242424;
+    background-color: #121212;
     height: 7vh;
+    padding: 3vh 2vh 2vh;
+}
+
+#header-logo {
+    max-width: 50px;
+    max-height: 50px;
+    margin-left: 30px;
+    margin-right: 15px;
+}
+
+.header-left h1 {
+    font-size: 1.8em;
+    color: #fff8e1;
 }
 
 .header-left {
     width: 50vw;
     display: flex;
     flex-direction: row;
+    align-items: center;
 }
 
 .header-right {
@@ -22,6 +36,7 @@
 }
 
 .header-button {
+    margin: 2px 2px;
     width:15vw;
     background-color: #ffe082;
     border: none;

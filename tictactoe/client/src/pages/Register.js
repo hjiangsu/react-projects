@@ -61,7 +61,7 @@ function Register(props) {
                     {/* add content here */}
                 </div>
                 <div className="register-input">
-                    <h1>Create an Account</h1>
+                    <h1>Register</h1>
                     <form id="register-form" className="register-form" onSubmit={createAccount}>
                         <input 
                             type="text" 
