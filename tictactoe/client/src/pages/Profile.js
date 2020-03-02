@@ -16,25 +16,12 @@ function Homepage(props) {
 
     //Create effect hook that grabs the user information and statistics based on the userid
     
-
-    if (startGame) {
-        return (
-            <Game />
-        )
-    }
-    else {
         return (
             <Fragment>
-                <Header 
-                    page={'home'} 
-                    logout={() => {
-                        props.updateAuthentication();
-                    }}
-                />
                 <div className="homepage-root">
                     <div className="homepage-container">
                         <div className="homepage-left">
-                            <Profile user={props.user} />
+                            {/* <Profile user={props.user} /> */}
                             <div className="homepage-game">
                                 <button onClick={() => setStartGame(true)}>Start New Game</button>
                             </div>
@@ -46,7 +33,7 @@ function Homepage(props) {
                 </div>
             </Fragment>
         );
-    }
+    
 }
 
 export default Homepage;

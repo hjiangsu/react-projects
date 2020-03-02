@@ -1,12 +1,13 @@
 import React, {useState, useEffect, Fragment} from 'react';
-import {useHistory} from 'react-router-dom';
 import axios from 'axios';
 
-import Header from '../components/Header.js';
-
+import {useAuth} from '../context/auth.js';
 import '../stylesheets/Register.css';
+import { Redirect } from 'react-router-dom';
 
 function Register(props) {
+
+    const { authStatus, setAuthStatus } = useAuth();
 
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
@@ -14,7 +15,8 @@ function Register(props) {
     const [email, setEmail] = useState("");
     const [age, setAge] = useState("");
 
-    const history = useHistory();
+    const [isRegistered, setIsRegistered] = useState(false);
+    // const history = useHistory();
 
     const [errorMsg, setErrorMsg] = useState({status: false, error: ''});
     const errorStatus = errorMsg.status ? errorMsg.error : null;
@@ -46,7 +48,8 @@ function Register(props) {
                 console.log(response.data.error)
                 if (response.data.success) {
                     console.log("Successfully registered new user");
-                    history.push('/profile');
+                    setAuthStatus(true);
+                    setIsRegistered(true);
                 }
                 else {
                     console.log("Error occurred while registering new user");
@@ -60,9 +63,12 @@ function Register(props) {
         }
     }
 
+    if (isRegistered || authStatus) {
+        return <Redirect to='/profile' />
+    }
+
     return (
         <Fragment>
-            <Header page={'register'} />
             <div className="register-root">
                 <div className="register-container">
                     <div className="register-info">

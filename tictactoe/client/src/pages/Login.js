@@ -1,55 +1,56 @@
 import React, {useState, Fragment} from 'react';
-import {Router, Redirect, Switch, Route} from 'react-router-dom';
-import axios from 'axios';
+import { Redirect } from 'react-router-dom';
 
-import Register from './Register.js';
-import Header from '../components/Header.js';
+import axios from 'axios';
 
 import '../stylesheets/Login.css';
 import logo from '../images/logo.png';
-import Homepage from './Homepage.js';
+
+// import Homepage from './Homepage.js';
+import { useAuth } from "../context/auth";
+
 
 
 function Login(props) {
 
-    // useState Hooks to keep information
+    const { authStatus, setAuthStatus } = useAuth();
+
+    // // useState Hooks to keep information
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
+    const [isLoggedIn, setLoggedIn] = useState(false);
     const [errorMsg, setErrorMsg] = useState({status: false, error: ''});
-
+    
     const errorStatus = errorMsg.status ? errorMsg.error : null;
 
-    // Authenticate with server database
-    const authenticate = (e) => {
-        e.preventDefault();
-        console.log("Logging in with following credentials => ", "username:" , username, "password:", password);
+    function postLogin(e) {
 
-        // Call authentication with server and return userid/cookie
+        e.preventDefault();
+
         axios.post('/api/login', {
             username: username,
             password: password
         })
         .then((response) => {
             if (response.data.success) {
-                console.log("Login successful");
-                props.updateAuthentication();
+                setAuthStatus(true);
+                setLoggedIn(true);
             }
             else {
-                console.log("Login unsuccessful");
                 setErrorMsg({status: true, error: <p className="login-error-message">Error: {response.data.error}</p>});
             }
         })
         .catch((err) => {
-            console.log("Unexpected error has occurred");
             console.log(err);
         });
     }
 
+    if (isLoggedIn || authStatus) {
+        return <Redirect to='/profile' />;
+    }
+
     return (
         <Fragment>
-            <Header 
-                page={'login'}
-            />
             <div className="login-root">
                 <div className="login-container">
                     <div className="login-app-info">
@@ -69,7 +70,7 @@ function Login(props) {
                     </div>
                     <div className="login-input">
                         <h1>Login</h1>
-                        <form className="login-form" onSubmit={authenticate}>
+                        <form className="login-form" onSubmit={postLogin}>
                             <input 
                                 type="text" 
                                 name="username" 

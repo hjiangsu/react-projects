@@ -1,77 +1,62 @@
-import React, {useState, useEffect} from 'react';
-import {useHistory, useLocation} from "react-router-dom";
+import React, { useState, useEffect } from 'react';
+import { BrowserRouter, Route, Switch } from "react-router-dom";
 import axios from 'axios';
 
+import Header from './components/Header.js';
+import Home from './pages/Home.js';
 import Login from './pages/Login.js';
-import Homepage from './pages/Homepage.js';
+import Register from './pages/Register.js';
+import Profile from './pages/Profile.js';
 import Game from './pages/Game.js';
 import Error from'./pages/Error.js';
 
+import { AuthContext } from "./context/auth.js";
+import PrivateRoute from './PrivateRoute.js';
+
 import './stylesheets/App.css';
-import Register from './pages/Register.js';
 
 function App(props) {
 
-    const [isAuthenticated, setAuthentication] = useState(false);
-    const [userData, setUserData] = useState({ username: '', email: '', age: ''});
-    const history = useHistory();
-    const location = useLocation();
-    
-    useEffect(() => {
-        if (location.pathname === '/Login') {
-            history.replace('/login');
-        }
-    });
+    const [authStatus, setAuthStatus] = useState(false);
 
-    // Check to see if current client is authenticated
     useEffect(() => {
         axios.get('/api/', {withCredentials: true})
-        .then((res) => {
-            console.log("checking status")
-            if (res.data.user) {
-                setUserData(res.data.user);
-                setAuthentication(true);
-
-                if (location.pathname === '/login' || location.pathname === '/' || location.pathname === '/register') {
-                    history.push('/profile');
-                }
-                else {
-                    history.push(location.pathname);
-                }
+        .then((response) => {
+            if (response.data.success) {
+                setAuthStatus(true);
             }
+        })
+        .catch((err) => {
+            console.log(err);
         });
     }, []);
 
-    if (isAuthenticated && location.pathname === '/profile') {
-        return (
-            <Homepage 
-                user={userData} 
-                updateAuthentication={() => {
-                    setAuthentication(false);
-                    history.push('/');
-                }}
-            />
-        );
-    }
-    else if (isAuthenticated && location.pathname === '/game') {
-        return <Game />
-    }
-    else if (!isAuthenticated && location.pathname === '/register') {
-        return <Register />
-    }
-    else if (!isAuthenticated && (location.pathname === '/'  || location.pathname === '/login')) {
-        return (
-            <Login 
-                updateAuthentication={() => {
-                    setAuthentication(true);
-                    history.push('/profile');
-                }}
-            />
-        );
-    }
-    else {
-        return <Error />
-    }
+    return (
+        <AuthContext.Provider value={{ authStatus, setAuthStatus }}>
+            {!authStatus &&
+                <div>Loading</div>
+            }
+            {authStatus && 
+                <BrowserRouter>
+                    <Header />
+                    <Switch>
+                        <Route exact path='/'>
+                            <Home />
+                        </Route>
+                        <Route path='/login'>
+                            <Login />
+                        </Route>
+                        <Route path='/register'>
+                            <Register />
+                        </Route>
+                        <PrivateRoute path='/profile' component={Profile}/>
+                        <PrivateRoute path='/game' component={Game}/>
+                        <Route render={Error} />
+                    </Switch>
+                </BrowserRouter>
+            }
+        </AuthContext.Provider>
+    );
 }
 
 export default App;
