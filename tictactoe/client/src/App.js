@@ -8,9 +8,10 @@ import Login from './pages/Login.js';
 import Register from './pages/Register.js';
 import Profile from './pages/Profile.js';
 import Game from './pages/Game.js';
-import Error from'./pages/Error.js';
+import Error from './pages/Error.js';
 
 import { AuthContext } from './context/auth.js';
+import { UserContext } from './context/usr.js';
 import PrivateRoute from './PrivateRoute.js';
 
 import './stylesheets/App.css';
@@ -19,42 +20,47 @@ import './stylesheets/App.css';
 // Main component focused on routing to other pages
 function App(props) {
 
-    const [authStatus, setAuthStatus] = useState(false);
+  const [authStatus, setAuthStatus] = useState(false);
+  const [userDetails, setUserDetails] = useState(false);
 
-    // Check authentication status when first loaded
-    useEffect(() => {
-        axios.get('/api/', {withCredentials: true})
-        .then((response) => {
-            if (response.data.success) {
-                setAuthStatus(true);
-            }
-        })
-        .catch((err) => {
-            console.log(err);
-        });
-    }, []);
+  // Check authentication status when first loaded
+  useEffect(() => {
+    axios.get('/api/', { withCredentials: true })
+      .then((response) => {
+        if (response.data.success) {
+          console.log(response.data)
+          setAuthStatus(true);
+          setUserDetails(response.data.user);
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
 
-    return (
-        <AuthContext.Provider value={{ authStatus, setAuthStatus }}>
-                <BrowserRouter>
-                        <Header />
-                        <Switch>
-                            <Route exact path='/'>
-                                <Home />
-                            </Route>
-                            <Route path='/login'>
-                                <Login />
-                            </Route>
-                            <Route path='/register'>
-                                <Register />
-                            </Route>
-                            <PrivateRoute path='/profile' component={Profile}/>
-                            <PrivateRoute path='/game' component={Game}/>
-                            <Route render={Error} />
-                        </Switch>
-                    </BrowserRouter>
-        </AuthContext.Provider>
-    );
+  return (
+    <AuthContext.Provider value={{ authStatus, setAuthStatus }}>
+      <UserContext.Provider value={{ userDetails, setUserDetails }}>
+        <BrowserRouter>
+          <Header />
+          <Switch>
+            <Route exact path='/'>
+              <Home />
+            </Route>
+            <Route path='/login'>
+              <Login />
+            </Route>
+            <Route path='/register'>
+              <Register />
+            </Route>
+            <PrivateRoute path='/profile' component={Profile} />
+            <PrivateRoute path='/game' component={Game} />
+            <Route render={Error} />
+          </Switch>
+        </BrowserRouter>
+      </UserContext.Provider>
+    </AuthContext.Provider>
+  );
 }
 
 export default App;
