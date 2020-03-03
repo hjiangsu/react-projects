@@ -1,22 +1,62 @@
-.profile-root {
+.homepage-root {
+    color: #e8eaf6;
+    background-color:#121212;
+    height: 88vh;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.homepage-container {
+    -webkit-box-shadow: 0px 0px 5px 1px rgba(0,0,0,0.50);
+    box-shadow: 0px 0px 5px 1px rgba(0,0,0,0.50);
+    height: 85vh;
+    width: 95vw;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.homepage-left{
     background-color: #292929;
     color: #242424;
     display: flex;
     flex: 1.5;
     flex-direction: column;
     padding: 2em 2em;
-    align-items: center;
 }
 
-.profile-avatar {
-    width: 250px;
-    height: 250px;
-    margin: 3vh 0vh;
-    background-color: aqua;
+.homepage-right {
+    background-color: #242424;
+    color: #e8eaf6;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 3em 2.5em;
+    flex: 2;
 }
 
-.profile-info {
-    background-color: brown;
-    padding: 2.5vh 0.5vw;
+.homepage-game button {
     width: 100%;
+    background-color: #ffe082;
+    border: none;
+    color: #242424;
+    padding: 16px 32px;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.profile-link {
+    margin: 2px 2px;
+    width:15vw;
+    background-color: #ffe082;
+    border: none;
+    color: #242424;
+    text-decoration: none;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }

@@ -1,13 +1,13 @@
 import React from 'react';
 import '../stylesheets/Profile.css';
 
-function Profile(props) {
+function User(props) {
 
-    const nameElement = <p>{props.user.username}</p>
-    const emailElement = <p>{props.user.email}</p>
-    const ageElement = <p>{props.user.age}</p>
+    const nameElement = <p></p>
+    const emailElement = <p></p>
+    const ageElement = <p></p>
 
-    return(
+    return (
         <div className="profile-root">
             <div className="profile-avatar">
                 Test
@@ -39,4 +39,4 @@ function Profile(props) {
 }
 
 
-export default Profile;
+export default User;

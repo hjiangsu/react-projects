@@ -10,7 +10,7 @@ import Profile from './pages/Profile.js';
 import Game from './pages/Game.js';
 import Error from'./pages/Error.js';
 
-import { AuthContext } from "./context/auth.js";
+import { AuthContext } from './context/auth.js';
 import PrivateRoute from './PrivateRoute.js';
 
 import './stylesheets/App.css';
@@ -33,28 +33,23 @@ function App(props) {
 
     return (
         <AuthContext.Provider value={{ authStatus, setAuthStatus }}>
-            {!authStatus &&
-                <div>Loading</div>
-            }
-            {authStatus && 
                 <BrowserRouter>
-                    <Header />
-                    <Switch>
-                        <Route exact path='/'>
-                            <Home />
-                        </Route>
-                        <Route path='/login'>
-                            <Login />
-                        </Route>
-                        <Route path='/register'>
-                            <Register />
-                        </Route>
-                        <PrivateRoute path='/profile' component={Profile}/>
-                        <PrivateRoute path='/game' component={Game}/>
-                        <Route render={Error} />
-                    </Switch>
-                </BrowserRouter>
-            }
+                        <Header />
+                        <Switch>
+                            <Route exact path='/'>
+                                <Home />
+                            </Route>
+                            <Route path='/login'>
+                                <Login />
+                            </Route>
+                            <Route path='/register'>
+                                <Register />
+                            </Route>
+                            <PrivateRoute path='/profile' component={Profile}/>
+                            <PrivateRoute path='/game' component={Game}/>
+                            <Route render={Error} />
+                        </Switch>
+                    </BrowserRouter>
         </AuthContext.Provider>
     );
 }

@@ -1,0 +1,22 @@
+.profile-root {
+    background-color: #292929;
+    color: #242424;
+    display: flex;
+    flex: 1.5;
+    flex-direction: column;
+    padding: 2em 2em;
+    align-items: center;
+}
+
+.profile-avatar {
+    width: 250px;
+    height: 250px;
+    margin: 3vh 0vh;
+    background-color: aqua;
+}
+
+.profile-info {
+    background-color: brown;
+    padding: 2.5vh 0.5vw;
+    width: 100%;
+}

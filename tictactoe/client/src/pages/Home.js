@@ -1,7 +1,7 @@
 import React from 'react';
+import { Redirect } from 'react-router-dom';
 
 import { useAuth } from '../context/auth.js';
-import { Route, Redirect } from 'react-router-dom';
 
 function Home(props) {
 
@@ -10,13 +10,14 @@ function Home(props) {
     if (authStatus) {
         return <Redirect to='/profile' />
     }
-
-    return (
-        <div>
-            Home
-        </div>
-
-    );
+    else {
+        return (
+            <div className=''>
+                
+            </div>
+    
+        );
+    }
 }
 
 export default Home;

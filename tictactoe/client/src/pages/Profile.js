@@ -1,14 +1,12 @@
-import React, { useState, Fragment } from 'react';
-import Profile from '../components/Profile.js';
+import React, { Fragment } from 'react';
+import {Link} from 'react-router-dom';
+
+import User from '../components/User.js';
 import Statistics from '../components/Statistics.js';
-import Game from './Game.js';
-import Header from '../components/Header.js';
-import '../stylesheets/Homepage.css';
+
+import '../stylesheets/Profile.css';
 
 function Homepage(props) {
-
-    const [startGame, setStartGame] = useState(false);
-
 
     //Call server to retrieve statistics and place it into userStats hook
 
@@ -23,7 +21,7 @@ function Homepage(props) {
                         <div className="homepage-left">
                             {/* <Profile user={props.user} /> */}
                             <div className="homepage-game">
-                                <button onClick={() => setStartGame(true)}>Start New Game</button>
+                                <Link className='profile-link' to='/game'>Start Game</Link>
                             </div>
                         </div>
                         <div className="homepage-right">
