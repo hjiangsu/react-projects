@@ -10,7 +10,7 @@
 .register-container {
     -webkit-box-shadow: 0px 0px 5px 1px rgba(0,0,0,0.50);
     box-shadow: 0px 0px 5px 1px rgba(0,0,0,0.50);
-    height: 70vh;
+    height: 75vh;
     width: 60vw;
     display: flex;
     flex-direction: row;
@@ -21,21 +21,9 @@
     background-color: #9fa8da;
     color: #242424;
     display: flex;
-    flex: 1.5;
+    flex: 1;
     flex-direction: column;
     padding: 2em 2em;
-}
-
-.register-info h1 {
-    font-size: 2em;
-    margin-top: 1em;
-    margin-bottom: 0.5em; 
-}
-
-.register-info h2 {
-    font-size: 1.2em;
-    margin-right: 0.5em;
-    margin-left: 0.5em;
 }
 
 .register-input {
@@ -44,12 +32,14 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    padding: 3em 3em;
+    padding: 3em 4em;
     flex: 2;
 }
 
 .register-input h1 {
+    font-weight: 300;
     font-size: 2.4em;
+    margin-bottom: 5px;
 }
 
 .register-form {
@@ -62,14 +52,21 @@
     margin-top: 0.5em;
     margin-bottom: 0.5em;
     padding: 0.5em 0.5em;
+    border: 3px white solid;
+}
+
+.register-input input:focus {
+    outline: none;
+    border: 3px #7986cb solid;
 }
 
 .register-input input[type=submit] {
-    background-color: #ffe082;
+    margin-top: 0.5em;
+    font-size: 1.1em;
+    background-color: #9fa8da;
     border: none;
-    color: #242424;
+    color: #121212;
     padding: 16px 32px;
     text-decoration: none;
-    margin: 4px 2px;
     cursor: pointer;
 }

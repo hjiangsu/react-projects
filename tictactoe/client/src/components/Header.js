@@ -25,8 +25,8 @@ function Header(props) {
 
     return (
         <div className="header-root">
-            <div className="header-left">
-                <img src={logo} alt="Logo" id="header-logo" onClick={goHome}/>
+            <div className="header-left" onClick={goHome}>
+                <img src={logo} alt="Logo" id="header-logo"/>
                 <h1>Tic-Tac-Toe</h1>
             </div>
             <div className="header-right">

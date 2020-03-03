@@ -1,6 +1,6 @@
 .login-root {
     background-color:#121212;
-    height: 88vh;
+    height: 95vh;
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -21,27 +21,22 @@
     background-color: #9fa8da;
     color: #242424;
     display: flex;
-    flex: 1.5;
+    flex: 1;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     padding: 2em 2em;
 }
 
-#login-app-info-logo {
-    max-width: 125px;
-    max-height: 125px;
-}
-
-.login-app-info h1 {
-    font-size: 2em;
-    margin-top: 1em;
-    margin-bottom: 1em;
-}
-
 .login-app-info h2 {
+    text-align: center;
+    margin: 25px 0px;
     font-size: 1.1em;
-    margin-bottom: 0.5em;
+}
+
+.login-app-info-image {
+    max-width: 170px;
+    max-height: 170px;
 }
 
 .login-input {
@@ -50,12 +45,14 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    padding: 3em 3em;
+    padding: 3em 4em;
     flex: 2;
 }
 
 .login-input h1 {
+    font-weight: 300;
     font-size: 2.4em;
+    margin-bottom: 10px;
 }
 
 .login-form {
@@ -64,17 +61,38 @@
     justify-content: center;
 }
 
-.login-input input {
+.login-input input[type=text],input[type=password] {
     margin-top: 0.5em;
     margin-bottom: 0.5em;
     padding: 0.5em 0.5em;
+    border: 3px white solid;
+}
+
+.login-input input[type=text]:focus , input[type=password]:focus {
+    outline: none;
+    border: 3px #7986cb solid;
 }
 
 .login-input input[type=submit] {
-    background-color: #ffe082;
+    margin-top: 0.5em;
+    font-size: 1.1em;
+    background-color: #9fa8da;
     border: none;
-    color: #242424;
+    color: #121212;
     padding: 16px 32px;
     text-decoration: none;
     cursor: pointer;
+}
+
+/* .login-input input[type=sumbit]:hover {
+    outline: none;
+    background-color: #121212;
+    color: white;
+} */
+
+.login-error {
+    margin: 2vh 0vh;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
 }

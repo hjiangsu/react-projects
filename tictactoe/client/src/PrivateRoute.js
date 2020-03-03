@@ -7,7 +7,7 @@ function PrivateRoute({ component: Component, ...rest }) {
 
   const { authStatus } = useAuth();
   
-  console.log(authStatus);
+  // Return the specified component if user is authenticated
   return(
     <Route 
       {...rest} 

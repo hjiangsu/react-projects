@@ -15,10 +15,13 @@ import PrivateRoute from './PrivateRoute.js';
 
 import './stylesheets/App.css';
 
+
+// Main component focused on routing to other pages
 function App(props) {
 
     const [authStatus, setAuthStatus] = useState(false);
 
+    // Check authentication status when first loaded
     useEffect(() => {
         axios.get('/api/', {withCredentials: true})
         .then((response) => {
