@@ -18,6 +18,7 @@ function Home(props) {
     if (authStatus) {
         return <Redirect to='/profile' />
     }
+    // Otherwise, show the home page
     else {
         return (
             <div className='home-root'>

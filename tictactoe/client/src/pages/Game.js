@@ -25,6 +25,7 @@ function Game(props) {
 
   // Setup connection between clients
   useEffect(() => {
+    // Check to see if the server sends a start game event socket
     socket.current.on('start-game', (opponent) => {
       console.log('player', playerSymbol);
       setOpponent(opponent);
@@ -82,9 +83,6 @@ function Game(props) {
       console.log('already have a piece there');
     }
   }
-
-
-
 
   return (
     <div className='game-root'>

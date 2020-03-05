@@ -9,7 +9,7 @@ import '../stylesheets/Profile.css';
 function Homepage(props) {
 
   // TODO: Call server to retrieve statistics and place it into userStats hook
-  //Create effect hook that grabs the user information and statistics based on the userid
+  // Create effect hook that grabs the user information and statistics based on the userid
   // const [userStats, setUserStats] = useState("");
 
   return (

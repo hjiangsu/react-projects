@@ -26,7 +26,6 @@ const router = express.Router();
 const server = http.createServer(app);
 const io = socketio(server);
 
-
 // Set up connect-mongo for storing user sessions
 const MongoStore = connectStore(session);
 
@@ -61,10 +60,13 @@ var sess = {
 
 app.use(session(sess));
 
+// Router for home - checks to see if you have an open session
 router.get('/', (req, res) => {
   if (req.session.user) {
     console.log('Found open session')
     console.log(req.session.user)
+
+    // Finds and returns the open session details
     User.findOne({ username: req.session.user.username }, (err, data) => {
       if (err) {
         return res.json({ success: false, error: err });
@@ -85,6 +87,7 @@ router.post('/login', (req, res) => {
   const username = req.body.username;
   const password = req.body.password;
 
+  // Find a user in the database
   User.findOne({ username: username }, (err, data) => {
     if (err) {
       return res.json({ success: false, error: err });
@@ -94,6 +97,7 @@ router.post('/login', (req, res) => {
     }
     else {
 
+      // Check to see if the hashes are the same - create session if they are the same
       bcrypt.compare(password, data.password, (err, result) => {
         if (err) {
           return res.json({ success: false, error: err })
@@ -102,6 +106,7 @@ router.post('/login', (req, res) => {
           return res.json({ success: false, error: 'Incorrect password' });
         }
         else {
+          // Create user session
           const userSession = { userid: data.id, username: data.username };
           const user = { username: data.username, email: data.email, age: data.age };
           req.session.user = userSession;
@@ -123,7 +128,7 @@ router.post('/register', (req, res) => {
         console.log(err);
       }
       else {
-        // Retrieve all fields
+        // Retrieve all fields from the request body
         user.username = req.body.username;
         user.password = hash;
         user.email = req.body.email;
@@ -147,7 +152,8 @@ router.post('/register', (req, res) => {
       }
     })
   }
-
+  
+  // Check to see if there is already a username with that name
   User.findOne({ username: req.body.username }, (err, data) => {
     if (err) {
       return res.json({ success: false, error: err });
@@ -161,6 +167,7 @@ router.post('/register', (req, res) => {
   });
 });
 
+// Destroy session
 router.get('/logout', (req, res) => {
   if (req.session.user) {
     req.session.destroy(() => {
@@ -172,6 +179,7 @@ router.get('/logout', (req, res) => {
   }
 });
 
+// Create a socket connection
 io.on('connection', (socket) => {
   console.log('connected');
 
@@ -185,6 +193,7 @@ io.on('connection', (socket) => {
     // });
   })
 
+  // Game queue
   socket.on('find-random-game', (data) => {
 
     console.log('finding random game for', data);
@@ -217,61 +226,11 @@ io.on('connection', (socket) => {
 
   })
 
-
+  // Disconnect socket if the user exits the game
   socket.on('disconnect', () => {
     console.log('disconnected');
   })
 })
-
-// this is our get method
-// this method fetches all available data in our database
-// router.get('/getData', (req, res) => {
-//   Data.find((err, data) => {
-//     if (err) return res.json({ success: false, error: err });
-//     return res.json({ success: true, data: data });
-//   });
-// });
-
-// this is our update method
-// this method overwrites existing data in our database
-// router.post('/updateData', (req, res) => {
-//   const { id, update } = req.body;
-//   Data.findByIdAndUpdate(id, update, (err) => {
-//     if (err) return res.json({ success: false, error: err });
-//     return res.json({ success: true });
-//   });
-// });
-
-// this is our delete method
-// this method removes existing data in our database
-// router.delete('/deleteData', (req, res) => {
-//   const { id } = req.body;
-//   Data.findByIdAndRemove(id, (err) => {
-//     if (err) return res.send(err);
-//     return res.json({ success: true });
-//   });
-// });
-
-// this is our create methid
-// this method adds new data in our database
-// router.post('/putData', (req, res) => {
-//   let data = new Data();
-
-//   const { id, message } = req.body;
-
-//   if ((!id && id !== 0) || !message) {
-//     return res.json({
-//       success: false,
-//       error: 'INVALID INPUTS',
-//     });
-//   }
-//   data.message = message;
-//   data.id = id;
-//   data.save((err) => {
-//     if (err) return res.json({ success: false, error: err });
-//     return res.json({ success: true });
-//   });
-// });
 
 // append /api for our http requests
 app.use('/api', router);

@@ -7,6 +7,7 @@ import { Redirect } from 'react-router-dom';
 
 function Register(props) {
 
+    // Create the hooks required by the login screen
     const { authStatus, setAuthStatus } = useAuth();
 
     const [username, setUsername] = useState("");
@@ -21,6 +22,7 @@ function Register(props) {
     const [errorMsg, setErrorMsg] = useState({status: false, error: ''});
     const errorStatus = errorMsg.status ? errorMsg.error : null;
 
+    // Checks to see if both password fields are the same
     useEffect(() => {
         const checkPassword = () => {
             if (password !== passwordConfirm) {
@@ -34,16 +36,19 @@ function Register(props) {
         checkPassword();
     }, [password, passwordConfirm]);
 
+    // Creates the account
     const createAccount = (e) => {
         e.preventDefault();
 
         if (password === passwordConfirm) {
+            // Make a request to the server and pass on the user details
             axios.post('/api/register', {
                 username: username,
                 password: password,
                 email: email,
                 age: age
             })
+            // promis is resolved and sets the correct hooks
             .then((response) => {
                 console.log(response.data.error)
                 if (response.data.success) {
@@ -63,10 +68,11 @@ function Register(props) {
         }
     }
 
+    // Redirect to profile if user is already authenticated
     if (isRegistered || authStatus) {
         return <Redirect to='/profile' />
     }
-
+    // Otherwise, show the register page
     return (
         <Fragment>
             <div className="register-root">

@@ -25,6 +25,7 @@ function Login(props) {
   function postLogin(e) {
     e.preventDefault();
 
+    // axios will retrieve data from server - creates a promise that will then set the hooks correctly
     axios.post('/api/login', {
       username: username,
       password: password,
