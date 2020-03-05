@@ -21,6 +21,7 @@ function Login(props) {
 
   const errorStatus = errorMsg.status ? errorMsg.error : null;
 
+  // Login will send details to server - server 
   function postLogin(e) {
     e.preventDefault();
 
@@ -42,6 +43,7 @@ function Login(props) {
       });
   }
 
+  // If already logged in, redirect to profile
   if (isLoggedIn || authStatus) {
     return <Redirect to='/profile' />;
   }
@@ -81,11 +83,9 @@ function Login(props) {
           </div>
         </div>
       </div>
-
     </Fragment>
 
   );
-
 }
 
 export default Login;

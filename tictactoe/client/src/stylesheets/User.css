@@ -1,6 +1,6 @@
-.profile-root {
+.user-root {
     background-color: #292929;
-    color: #242424;
+    color: #e8eaf6;
     display: flex;
     flex: 1.5;
     flex-direction: column;
@@ -8,15 +8,34 @@
     align-items: center;
 }
 
-.profile-avatar {
+.user-avatar {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 4vh;
+}
+
+.user-avatar-img {
     width: 250px;
     height: 250px;
     margin: 3vh 0vh;
-    background-color: aqua;
+    clip-path: circle(120px at center);
 }
 
-.profile-info {
-    background-color: brown;
+.user-avatar h1 {
+    font-size: 2em;
+    font-weight: 400;
+}
+
+.user-info {
+    display: flex;
+    flex-direction: column;
     padding: 2.5vh 0.5vw;
     width: 100%;
+}
+
+.user-info h1 {
+    font-size: 1.2em;
+    font-weight: 300;
+    padding: 0.20em 0em;
 }

@@ -1,11 +1,21 @@
-.game-board {
+.game-root {
+    background-color:#121212;
+    height: 95vh;
     display: flex;
     flex-direction: column;
+}
+.game-board {
+    height: 60vh;
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    justify-content: center;
 }
 
 .game-board-row {
     display: flex;
     flex-direction: row;
+    justify-content: center;
 }
 
 .game-board-tile {
@@ -15,14 +25,73 @@
     font-size: 24px;
     font-weight: bold;
     line-height: 34px;
-    height: 34px;
+    height: 100px;
     margin-right: -1px;
     margin-top: -1px;
     padding: 0;
     text-align: center;
-    width: 34px;
+    width: 100px;
 }
 
 .game-board-tile:focus {
     outline: none;
+}
+
+.game-queue-root {
+    direction: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-content: center;
+    height: 10vh;
+    margin: 3vh 3vw;
+}
+
+.game-queue-form {
+    direction: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    padding-top: 5vh;
+}
+
+.game-queue-root input:focus {
+    outline: none;
+    /* border: 3px #7986cb solid; */
+}
+
+.game-queue-root input {
+    margin-right: 2vw;
+    font-size: 1.1em;
+    background-color: #9fa8da;
+    border: none;
+    color: #121212;
+    padding: 16px 32px;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.game-queue-form {
+    display: flex;
+    flex: 1;
+}
+
+.game-queue-root input[type=text] {
+    background-color: #e8eaf6;
+    /* border: 3px white solid; */
+}
+
+.game-queue-root button:focus {
+    outline: none;
+    /* border: 3px #7986cb solid; */
+}
+
+.game-queue-root button {
+    font-size: 1.1em;
+    background-color: #9fa8da;
+    border: none;
+    color: #121212;
+    padding: 16px 32px;
+    text-decoration: none;
+    cursor: pointer;
 }

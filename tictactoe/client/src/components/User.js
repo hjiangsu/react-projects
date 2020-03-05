@@ -2,46 +2,36 @@ import React from 'react';
 
 import { useUser } from '../context/usr.js';
 
-import '../stylesheets/Profile.css';
+import '../stylesheets/User.css';
+import avatar from '../images/avatar.png';
 
 function User(props) {
 
-    const { userDetails } = useUser();
-    console.log(userDetails)
+  const { userDetails } = useUser();
+  console.log(userDetails)
 
-    if(userDetails) {
-        return (
-            <div className="profile-root">
-                <div className="profile-avatar">
-                    Test
-                </div>
-                <div className="profile-info">
-                    <ul>
-                        <li>
-                            <div className="profile-username">
-                                <p>Name</p>
-                                {userDetails.username}
-                            </div>
-                        </li>
-                        <li>
-                            <div className="profile-email">
-                                <p>Email</p>
-                                {userDetails.email}
-                            </div>
-                        </li>
-                        <li>
-                            <div className="profile-age">
-                                <p>Age</p>
-                                {userDetails.age}
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        );
-    } else {
-        return (<div>Loading</div>);
-    }
+  if (userDetails) {
+    return (
+      <div className="user-root">
+        <div className="user-avatar">
+          <img className='user-avatar-img' src={avatar} alt='avatar'/>
+          <div className="user-username">
+            <h1>{userDetails.username}</h1>
+          </div>
+        </div>
+        <div className="user-info">
+          <div className="user-email">
+            <h1>Email: {userDetails.email} </h1>
+          </div>
+          <div className="user-age">
+            <h1>Age: {userDetails.age}</h1>
+          </div>
+        </div>
+      </div>
+    );
+  } else {
+    return (<div>Loading</div>);
+  }
 }
 
 

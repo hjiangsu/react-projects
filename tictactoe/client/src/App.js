@@ -25,7 +25,7 @@ function App(props) {
 
   // Check authentication status when first loaded
   useEffect(() => {
-    axios.get('/api/' /*, { withCredentials: true }*/)
+    axios.get('/api/')
       .then((response) => {
         if (response.data.success) {
           console.log(response.data)
@@ -38,6 +38,7 @@ function App(props) {
       });
   }, []);
 
+  // React-Router Paths
   return (
     <AuthContext.Provider value={{ authStatus, setAuthStatus }}>
       <UserContext.Provider value={{ userDetails, setUserDetails }}>
