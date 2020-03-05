@@ -7,6 +7,7 @@ import '../stylesheets/Profile.css';
 function User(props) {
 
     const { userDetails } = useUser();
+    console.log(userDetails)
 
     if(userDetails) {
         return (

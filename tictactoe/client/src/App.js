@@ -25,7 +25,7 @@ function App(props) {
 
   // Check authentication status when first loaded
   useEffect(() => {
-    axios.get('/api/', { withCredentials: true })
+    axios.get('/api/' /*, { withCredentials: true }*/)
       .then((response) => {
         if (response.data.success) {
           console.log(response.data)

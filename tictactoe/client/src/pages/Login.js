@@ -6,10 +6,12 @@ import '../stylesheets/Login.css';
 import login from '../images/login.png';
 
 import { useAuth } from "../context/auth";
+import { useUser } from '../context/usr.js';
 
 function Login(props) {
 
   const { authStatus, setAuthStatus } = useAuth();
+  const { setUserDetails } = useUser();
 
   // // useState Hooks to keep information
   const [username, setUsername] = useState("");
@@ -30,6 +32,7 @@ function Login(props) {
         if (response.data.success) {
           setAuthStatus(true);
           setLoggedIn(true);
+          setUserDetails(response.data.user);
         } else {
           setErrorMsg({ status: true, error: <p className="login-error-message">Error: {response.data.error}</p> });
         }
