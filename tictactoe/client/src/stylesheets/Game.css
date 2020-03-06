@@ -43,7 +43,7 @@
     justify-content: center;
     align-content: center;
     height: 10vh;
-    margin: 3vh 3vw;
+    margin: 3vh 3vh;
 }
 
 .game-queue-form {
@@ -61,7 +61,7 @@
 }
 
 .game-queue-root input {
-    margin-right: 2vw;
+    margin-right: 20px;
     font-size: 1.1em;
     background-color: #9fa8da;
     border: none;
@@ -78,6 +78,7 @@
 
 .game-queue-root input[type=text] {
     background-color: #e8eaf6;
+    width: 50px;
     /* border: 3px white solid; */
 }
 

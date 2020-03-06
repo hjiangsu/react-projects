@@ -93,7 +93,7 @@ function Game(props) {
               type='text'
               value={gameCode}
               name='game-room-code'
-              placeholder='Game Room Code'
+              placeholder='Code'
               onChange={(e) => setGameCode(e.target.value)}
               required
             />
